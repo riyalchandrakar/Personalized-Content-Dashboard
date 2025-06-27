@@ -69,7 +69,7 @@ const PersonalizedFeed = () => {
               <Reorder.Item
                 key={index}
                 value={card}
-                as={motion.li}
+                as="li" // ✅ FIXED HERE
                 layout
                 layoutScroll
                 dragListener={true}

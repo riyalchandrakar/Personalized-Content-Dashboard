@@ -20,6 +20,9 @@ export default function Home() {
         <Link href="/social" className="text-blue-500 hover:underline">
           Social
         </Link>
+        <Link href="/favorites" className="text-blue-500 hover:underline">
+          Favorites
+        </Link>
       </div>
     </div>
   );
