@@ -1,6 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import NewsFeed from "@/components/NewsFeed";
 import MovieRecommendations from "@/components/MovieRecommendations";
+import SocialFeed from "@/components/SocialFeed";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         </h1>
         <NewsFeed />
         <MovieRecommendations />
+        <SocialFeed />
       </main>
     </div>
   );

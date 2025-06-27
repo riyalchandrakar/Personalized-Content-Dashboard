@@ -5,11 +5,13 @@ import { persistReducer, persistStore } from "redux-persist";
 import preferencesReducer from "../features/preferences/preferencesSlice";
 import { newsApi } from "@/services/newsApi";
 import { tmdbApi } from "@/services/tmdbApi";
+import { socialApi } from "@/services/socialApi";
 
 const rootReducer = combineReducers({
   preferences: preferencesReducer,
   [newsApi.reducerPath]: newsApi.reducer,
   [tmdbApi.reducerPath]: tmdbApi.reducer,
+  [socialApi.reducerPath]: socialApi.reducer,
 });
 
 const persistConfig = {
@@ -27,7 +29,8 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(newsApi.middleware)
-      .concat(tmdbApi.middleware),
+      .concat(tmdbApi.middleware)
+      .concat(socialApi.middleware),
 });
 
 export const persistor = persistStore(store);

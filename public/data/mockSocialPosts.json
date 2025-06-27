@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "username": "riyal_dev",
+    "avatar": "/avatars/user1.png",
+    "content": "Just finished building a React project! #webdev #react",
+    "image": "/posts/react.png",
+    "hashtags": ["webdev", "react"]
+  },
+  {
+    "id": "2",
+    "username": "frontend_guru",
+    "avatar": "/avatars/user2.png",
+    "content": "Dark mode is love 🌙 #frontend #ux",
+    "image": "/posts/darkmode.jpg",
+    "hashtags": ["frontend", "ux"]
+  },
+  {
+    "id": "3",
+    "username": "design_daily",
+    "avatar": "/avatars/user3.png",
+    "content": "Minimalist dashboard with Framer Motion #design #dashboard",
+    "image": "/posts/design.jpg",
+    "hashtags": ["design", "dashboard"]
+  }
+]
