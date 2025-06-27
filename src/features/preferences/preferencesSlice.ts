@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface PreferencesState {
   categories: string[];
   darkMode: boolean;
-  favorites: string[]; // we’ll use this later
+  favorites: string[];
 }
 
 const initialState: PreferencesState = {

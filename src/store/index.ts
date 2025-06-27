@@ -3,9 +3,11 @@ import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import preferencesReducer from "../features/preferences/preferencesSlice";
+import { newsApi } from "@/services/newsApi";
 
 const rootReducer = combineReducers({
   preferences: preferencesReducer,
+  [newsApi.reducerPath]: newsApi.reducer,
 });
 
 const persistConfig = {
@@ -21,7 +23,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       thunk: true,
       serializableCheck: false,
-    }),
+    }).concat(newsApi.middleware),
 });
 
 export const persistor = persistStore(store);

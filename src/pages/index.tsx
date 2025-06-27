@@ -1,4 +1,5 @@
 import Sidebar from "@/components/Sidebar";
+import NewsFeed from "@/components/NewsFeed";
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
           Dashboard
         </h1>
-        {/* Content will go here */}
+        <NewsFeed />
       </main>
     </div>
   );
