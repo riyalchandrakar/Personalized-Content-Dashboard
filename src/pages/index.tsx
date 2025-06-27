@@ -1,20 +1,26 @@
-import Sidebar from "@/components/Sidebar";
-import NewsFeed from "@/components/NewsFeed";
-import MovieRecommendations from "@/components/MovieRecommendations";
-import SocialFeed from "@/components/SocialFeed";
+// pages/index.tsx
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-6 bg-white dark:bg-gray-800 min-h-screen">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-          Dashboard
-        </h1>
-        <NewsFeed />
-        <MovieRecommendations />
-        <SocialFeed />
-      </main>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900 text-center">
+      <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+        Welcome to Your Personalized Dashboard 🎉
+      </h1>
+      <p className="text-gray-600 dark:text-gray-300 mb-6">
+        Choose a section below to explore:
+      </p>
+      <div className="space-x-4">
+        <Link href="/news" className="text-blue-500 hover:underline">
+          News
+        </Link>
+        <Link href="/movies" className="text-blue-500 hover:underline">
+          Movies
+        </Link>
+        <Link href="/social" className="text-blue-500 hover:underline">
+          Social
+        </Link>
+      </div>
     </div>
   );
 }

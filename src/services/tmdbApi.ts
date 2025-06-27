@@ -9,7 +9,24 @@ export const tmdbApi = createApi({
     getTrendingMovies: builder.query({
       query: () => `trending/movie/day?api_key=${TMDB_API_KEY}`,
     }),
+
+    // ✅ New endpoint to get movies by selected genres
+    getMoviesByGenres: builder.query({
+      query: (genres: string) =>
+        `discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genres}&sort_by=popularity.desc`,
+    }),
+
+    searchMovies: builder.query({
+      query: (query) =>
+        `search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
+          query
+        )}`,
+    }),
   }),
 });
 
-export const { useGetTrendingMoviesQuery } = tmdbApi;
+export const {
+  useGetTrendingMoviesQuery,
+  useGetMoviesByGenresQuery,
+  useSearchMoviesQuery, // ✅ Export the new hook
+} = tmdbApi;

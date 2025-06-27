@@ -1,39 +1,51 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { toggleCategory } from "@/features/preferences/preferencesSlice";
-
-const categories = ["technology", "sports", "finance", "movies", "music"];
+import Link from "next/link";
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
-  const selectedCategories = useSelector(
-    (state: RootState) => state.preferences.categories
-  );
-
-  const handleToggle = (category: string) => {
-    dispatch(toggleCategory(category));
-  };
-
   return (
-    <aside className="w-64 h-screen bg-gray-100 dark:bg-gray-900 p-4 border-r dark:border-gray-700">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
-        Preferences
-      </h2>
-      <ul>
-        {categories.map((cat) => (
-          <li key={cat} className="flex items-center justify-between mb-2">
-            <span className="text-gray-800 dark:text-white capitalize">
-              {cat}
-            </span>
-            <input
-              type="checkbox"
-              checked={selectedCategories.includes(cat)}
-              onChange={() => handleToggle(cat)}
-              className="accent-blue-500"
-            />
-          </li>
-        ))}
-      </ul>
+    <aside className="w-64 h-screen bg-gray-100 dark:bg-gray-900 p-4 border-r dark:border-gray-700 flex flex-col justify-between">
+      <div>
+        <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+          Navigation
+        </h2>
+        <nav className="space-y-2">
+          <Link
+            href="/news"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            📰 News
+          </Link>
+          <Link
+            href="/movies"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            🎬 Movies
+          </Link>
+          <Link
+            href="/social"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            📱 Social
+          </Link>
+          <Link
+            href="/trending"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            🔥 Trending
+          </Link>
+          <Link
+            href="/favorites"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            ⭐ Favorites
+          </Link>
+          <Link
+            href="/settings"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            ⚙️ Settings
+          </Link>
+        </nav>
+      </div>
     </aside>
   );
 };
