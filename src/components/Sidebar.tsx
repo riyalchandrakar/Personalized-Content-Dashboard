@@ -9,6 +9,13 @@ const Sidebar = () => {
         </h2>
         <nav className="space-y-2">
           <Link
+            href="/feed"
+            className="block text-gray-800 dark:text-white hover:underline"
+          >
+            🧠 Personalized Feed
+          </Link>
+
+          <Link
             href="/news"
             className="block text-gray-800 dark:text-white hover:underline"
           >
@@ -37,12 +44,6 @@ const Sidebar = () => {
             className="block text-gray-800 dark:text-white hover:underline"
           >
             ⭐ Favorites
-          </Link>
-          <Link
-            href="/settings"
-            className="block text-gray-800 dark:text-white hover:underline"
-          >
-            ⚙️ Settings
           </Link>
         </nav>
       </div>

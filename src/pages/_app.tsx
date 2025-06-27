@@ -3,12 +3,20 @@ import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store, persistor } from "@/store";
 import { PersistGate } from "redux-persist/integration/react";
+import useDarkMode from "@/hooks/useDarkMode";
+
+function DarkModeGate({ children }: { children: React.ReactNode }) {
+  useDarkMode();
+  return <>{children}</>;
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Component {...pageProps} />
+        <DarkModeGate>
+          <Component {...pageProps} />
+        </DarkModeGate>
       </PersistGate>
     </Provider>
   );

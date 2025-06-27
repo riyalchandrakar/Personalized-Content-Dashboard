@@ -10,7 +10,6 @@ export const tmdbApi = createApi({
       query: () => `trending/movie/day?api_key=${TMDB_API_KEY}`,
     }),
 
-    // ✅ New endpoint to get movies by selected genres
     getMoviesByGenres: builder.query({
       query: (genres: string) =>
         `discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genres}&sort_by=popularity.desc`,
@@ -28,5 +27,5 @@ export const tmdbApi = createApi({
 export const {
   useGetTrendingMoviesQuery,
   useGetMoviesByGenresQuery,
-  useSearchMoviesQuery, // ✅ Export the new hook
+  useSearchMoviesQuery,
 } = tmdbApi;

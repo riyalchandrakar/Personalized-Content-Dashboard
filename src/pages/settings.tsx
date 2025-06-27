@@ -1,8 +1,10 @@
+// ✅ pages/settings.tsx
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import {
   setNewsCategories,
   setMovieGenres,
+  toggleDarkMode,
 } from "@/features/preferences/preferencesSlice";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
@@ -19,10 +21,11 @@ const movieGenres = [
 const SettingsPage = () => {
   const dispatch = useDispatch();
 
-  // ✅ Safe fallback defaults
-  const { newsCategories = [], movieGenres: selectedGenres = [] } = useSelector(
-    (state: RootState) => state.preferences
-  );
+  const {
+    newsCategories = [],
+    movieGenres: selectedGenres = [],
+    darkMode,
+  } = useSelector((state: RootState) => state.preferences);
 
   const handleNewsChange = (category: string) => {
     const updated = newsCategories.includes(category)
@@ -36,6 +39,12 @@ const SettingsPage = () => {
       ? selectedGenres.filter((g) => g !== id)
       : [...selectedGenres, id];
     dispatch(setMovieGenres(updated));
+  };
+
+  const handleReset = () => {
+    dispatch(setNewsCategories(["technology"]));
+    dispatch(setMovieGenres([28]));
+    if (darkMode) dispatch(toggleDarkMode());
   };
 
   return (
@@ -63,7 +72,7 @@ const SettingsPage = () => {
           </div>
 
           {/* Movie Genres */}
-          <div>
+          <div className="mb-10">
             <h2 className="text-xl font-semibold mb-3">🎬 Movie Genres</h2>
             {movieGenres.map((genre) => (
               <label key={genre.id} className="block mb-2">
@@ -76,6 +85,28 @@ const SettingsPage = () => {
                 {genre.name}
               </label>
             ))}
+          </div>
+
+          {/* Dark Mode */}
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-3">🌙 Dark Mode</h2>
+            <button
+              onClick={() => dispatch(toggleDarkMode())}
+              className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-600"
+            >
+              {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            </button>
+          </div>
+
+          {/* Reset Preferences */}
+          <div>
+            <h2 className="text-xl font-semibold mb-3">🔁 Reset Preferences</h2>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 rounded bg-red-500 text-white"
+            >
+              Reset to Default Settings
+            </button>
           </div>
         </main>
       </div>

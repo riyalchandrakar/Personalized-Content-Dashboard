@@ -13,8 +13,10 @@ export default function MoviesPage() {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
 
-  const { movieGenres } = useSelector((state: RootState) => state.preferences);
-  const genreQuery = movieGenres.join(",") || "28";
+  const { movieGenres = [] } = useSelector(
+    (state: RootState) => state.preferences
+  );
+  const genreQuery = movieGenres.length > 0 ? movieGenres.join(",") : "28";
 
   const {
     data: defaultData,
