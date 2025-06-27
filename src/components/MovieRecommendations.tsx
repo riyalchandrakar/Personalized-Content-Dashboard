@@ -33,14 +33,30 @@ const MovieRecommendations = () => {
                 alt={movie.title}
                 className="rounded mb-2 h-64 object-cover w-full"
               />
-              <h3 className="text-md font-semibold">{movie.title}</h3>
-              <p className="text-sm">
+              <h3 className="text-md font-semibold text-gray-800 dark:text-white">
+                {movie.title}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
                 ⭐ {movie.vote_average} | 📅 {movie.release_date}
               </p>
+
+              {/* ✅ "Play Now" button */}
+              <a
+                href={`https://www.themoviedb.org/movie/${movie.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 mr-2 px-4 py-1 text-sm font-medium rounded bg-blue-600 text-white hover:bg-blue-700"
+              >
+                🎬 Play Now
+              </a>
+
+              {/* ❤️ Favorite toggle button */}
               <button
                 onClick={() => dispatch(toggleFavorite(movie.title))}
                 className={`mt-2 text-sm px-3 py-1 rounded ${
-                  isFav ? "bg-red-500 text-white" : "bg-gray-200"
+                  isFav
+                    ? "bg-red-500 text-white"
+                    : "bg-gray-200 dark:bg-gray-600"
                 }`}
               >
                 {isFav ? "Remove Favorite" : "Add to Favorites"}

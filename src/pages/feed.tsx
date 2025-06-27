@@ -69,7 +69,7 @@ const PersonalizedFeed = () => {
               <Reorder.Item
                 key={index}
                 value={card}
-                as="li" // ✅ FIXED HERE
+                as="li"
                 layout
                 layoutScroll
                 dragListener={true}
@@ -89,6 +89,7 @@ const PersonalizedFeed = () => {
                   transition={{ duration: 0.3 }}
                   className="cursor-grab active:cursor-grabbing"
                 >
+                  {/* News Card */}
                   {card.type === "news" && (
                     <div className="bg-white dark:bg-gray-700 p-4 rounded shadow">
                       <h3 className="font-semibold">{card.data.title}</h3>
@@ -102,10 +103,10 @@ const PersonalizedFeed = () => {
                         Read More
                       </a>
                       <button
-                        className={`mt-2 text-sm px-3 py-1 rounded ${
+                        className={`mt-2 ml-2 text-sm px-3 py-1 rounded ${
                           favorites.includes(card.data.title)
                             ? "bg-red-500 text-white"
-                            : "bg-gray-200"
+                            : "bg-gray-200 dark:bg-gray-600"
                         }`}
                         onClick={() =>
                           dispatch(toggleFavorite(card.data.title))
@@ -118,6 +119,7 @@ const PersonalizedFeed = () => {
                     </div>
                   )}
 
+                  {/* Movie Card */}
                   {card.type === "movie" && (
                     <div className="bg-white dark:bg-gray-700 p-4 rounded shadow">
                       <img
@@ -129,8 +131,24 @@ const PersonalizedFeed = () => {
                         alt={card.data.title}
                         className="rounded mb-2 h-64 object-cover w-full"
                       />
-                      <h3 className="font-semibold">{card.data.title}</h3>
-                      <p className="text-sm">⭐ {card.data.vote_average}</p>
+                      <h3 className="font-semibold text-gray-800 dark:text-white">
+                        {card.data.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        ⭐ {card.data.vote_average}
+                      </p>
+
+                      {/* ✅ Play Now */}
+                      <a
+                        href={`https://www.themoviedb.org/movie/${card.data.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-2 mr-2 px-4 py-1 text-sm font-medium rounded bg-blue-600 text-white hover:bg-blue-700"
+                      >
+                        🎬 Play Now
+                      </a>
+
+                      {/* Favorite button */}
                       <button
                         onClick={() =>
                           dispatch(toggleFavorite(card.data.title))
@@ -138,7 +156,7 @@ const PersonalizedFeed = () => {
                         className={`mt-2 text-sm px-3 py-1 rounded ${
                           favorites.includes(card.data.title)
                             ? "bg-red-500 text-white"
-                            : "bg-gray-200"
+                            : "bg-gray-200 dark:bg-gray-600"
                         }`}
                       >
                         {favorites.includes(card.data.title)
@@ -148,6 +166,7 @@ const PersonalizedFeed = () => {
                     </div>
                   )}
 
+                  {/* Social Card */}
                   {card.type === "social" && (
                     <div className="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
                       <div className="flex items-center mb-2">
@@ -182,7 +201,7 @@ const PersonalizedFeed = () => {
                         className={`mt-2 text-sm px-3 py-1 rounded ${
                           favorites.includes(card.data.content)
                             ? "bg-red-500 text-white"
-                            : "bg-gray-200"
+                            : "bg-gray-200 dark:bg-gray-600"
                         }`}
                       >
                         {favorites.includes(card.data.content)
