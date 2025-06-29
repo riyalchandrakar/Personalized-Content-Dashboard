@@ -4,12 +4,12 @@ import { toggleFavorite } from "@/features/preferences/preferencesSlice";
 import { useGetMoviesByGenresQuery } from "@/services/tmdbApi";
 
 const MovieRecommendations = () => {
+  const dispatch = useDispatch();
   const { movieGenres, favorites } = useSelector(
     (state: RootState) => state.preferences
   );
-  const dispatch = useDispatch();
 
-  const genreQuery = movieGenres.join(",") || "28"; // fallback to 'Action' genre
+  const genreQuery = movieGenres.join(",") || "28"; // fallback to Action (28)
   const { data, isLoading, isError } = useGetMoviesByGenresQuery(genreQuery);
 
   if (isLoading) return <p className="text-white">Loading movies...</p>;
@@ -22,7 +22,8 @@ const MovieRecommendations = () => {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {data?.results.map((movie: any) => {
-          const isFav = favorites.includes(movie.title);
+          const isFav = favorites.some((f) => f.id === String(movie.id));
+
           return (
             <div
               key={movie.id}
@@ -40,7 +41,7 @@ const MovieRecommendations = () => {
                 ⭐ {movie.vote_average} | 📅 {movie.release_date}
               </p>
 
-              {/* ✅ "Play Now" button */}
+              {/* 🎬 Play Now button */}
               <a
                 href={`https://www.themoviedb.org/movie/${movie.id}`}
                 target="_blank"
@@ -50,13 +51,23 @@ const MovieRecommendations = () => {
                 🎬 Play Now
               </a>
 
-              {/* ❤️ Favorite toggle button */}
+              {/* ❤️ Add/Remove Favorite */}
               <button
-                onClick={() => dispatch(toggleFavorite(movie.title))}
+                onClick={() =>
+                  dispatch(
+                    toggleFavorite({
+                      id: String(movie.id),
+                      type: "movie",
+                      title: movie.title,
+                      image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                      description: `⭐ ${movie.vote_average} | 📅 ${movie.release_date}`,
+                    })
+                  )
+                }
                 className={`mt-2 text-sm px-3 py-1 rounded ${
                   isFav
                     ? "bg-red-500 text-white"
-                    : "bg-gray-200 dark:bg-gray-600"
+                    : "bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-white"
                 }`}
               >
                 {isFav ? "Remove Favorite" : "Add to Favorites"}
